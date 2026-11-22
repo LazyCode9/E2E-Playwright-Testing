@@ -1,0 +1,30 @@
+import { test, expect } from '@playwright/test';
+import { Login } from '../Pages/LoginPage.js';
+import { Home } from '../Pages/HomePage.js';
+import { Events } from '../Pages/EventsPage.js';
+
+const url = "https://eventhub.rahulshettyacademy.com/";
+const email = "enma@gmail.com";
+const password = "Zorojur0!";
+
+test("Logout_Test", async ({page}) => {
+    const home = new Home(page);
+    const login = new Login(page);
+    await login.Go(url);
+    await home.ValidateLogout();
+    await expect(home.expected_heading_login).toBeVisible();
+})
+
+
+test("Search_Test", async ({page}) => {
+    const home = new Home(page);
+    const event="Dilli Diwali Mela";
+    const events = new Events(page,event);
+    const login = new Login(page);
+    await login.Go(url);
+    await home.GoEvents();
+    await events.ValidSearch(event);
+    await expect(events.eventname).toBeVisible();
+
+})
+
