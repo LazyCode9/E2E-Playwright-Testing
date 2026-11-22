@@ -7,10 +7,30 @@ const url = "https://eventhub.rahulshettyacademy.com/";
 const email = "enma@gmail.com";
 const password = "Zorojur0!";
 
+ test("Login_Test", async ({page})=>{
+    
+        const login = new Login(page);
+        const home = new Home(page);
+        await login.Go(url);
+        await login.validLogin(email,password);
+        await expect(home.expected_heading_home).toBeVisible();
+        await page.context().storageState({path:'Pages/Auth.json'});
+    })
+
+test("Invalid_Login", async ({page}) => {
+    const login = new Login(page);
+    let fake_email = "fake@gmail.com";
+    let fake_password = "pass123";
+    await login.Go(url);
+    await login.validLogin(fake_email,fake_password);
+    await expect(login.loginError).toBeVisible();
+    });
+
 test("Logout_Test", async ({page}) => {
     const home = new Home(page);
     const login = new Login(page);
     await login.Go(url);
+    await login.validLogin(email,password);
     await home.ValidateLogout();
     await expect(home.expected_heading_login).toBeVisible();
 })
@@ -22,9 +42,9 @@ test("Search_Test", async ({page}) => {
     const events = new Events(page,event);
     const login = new Login(page);
     await login.Go(url);
+    await login.validLogin(email,password);
     await home.GoEvents();
     await events.ValidSearch(event);
     await expect(events.eventname).toBeVisible();
-
 })
 
