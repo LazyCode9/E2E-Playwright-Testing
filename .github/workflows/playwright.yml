@@ -1,7 +1,7 @@
 name: Playwright Tests
 on:
   push:
-    branches: [ main, master,septCut ]
+    branches: [ main, master ]
   pull_request:
     branches: [ main, master ]
  
@@ -72,3 +72,5 @@ jobs:
 #Directory permission is needed for the current user to register the application. For how to configure, please refer 'https://learn.microsoft.com/azure/azure-resource-manager/resource-group-create-service-principal-portal'. Original error: Insufficient privileges to complete the operation.
 
 #az ad sp create-for-rbac --name "github-actions" --role "Storage Blob Data Contributor" --scopes /subscriptions/<SUBSCRIPTION_ID>/resourceGroups/<RESOURCE_GROUP_NAME>/providers/Microsoft.Storage/storageAccounts/<STORAGE_ACCOUNT_NAME>
+
+ # $env:PLAYWRIGHT_SERVICE_URL="wss://eastasia.api.playwright.microsoft.com/playwrightworkspaces/f94f011b-656b-48e2-a71b-a061579ebb4c/browsers" 
