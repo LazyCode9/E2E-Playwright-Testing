@@ -7,6 +7,7 @@ export class Home
         this.logout_button = page.getByRole("button",{name:'Logout'});
         this.expected_heading_login = page.getByRole("heading", {name: 'Sign in to EventHub'});
         this.Events = page.getByRole("link",{name:'Events',exact: true});
+        
     }
 
 async Go(url)
@@ -23,5 +24,6 @@ async GoEvents()
 {
     await this.Events.click();
 }
+
 
 }

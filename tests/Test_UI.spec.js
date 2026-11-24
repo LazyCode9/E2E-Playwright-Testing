@@ -38,13 +38,23 @@ test("Logout_Test", async ({page}) => {
 
 test("Search_Test", async ({page}) => {
     const home = new Home(page);
-    const event="Dilli Diwali Mela";
-    const events = new Events(page,event);
+    const events = new Events(page);
     const login = new Login(page);
     await login.Go(url);
     await login.validLogin(email,password);
     await home.GoEvents();
-    await events.ValidSearch(event);
+    await events.ValidSearch("Dilli Diwali Mela");
     await expect(events.eventname).toBeVisible();
 })
 
+test('Filter_test', async ({ page }) => {
+    const home = new Home(page);
+    const events = new Events(page);
+    const login = new Login(page);
+    const category= "Conference";
+    await login.Go(url);
+    await login.validLogin(email,password);
+    await home.GoEvents();
+    await events.Filter_Category(category);
+    await expect(page.getByTestId('event-card')).toContainText('Conference');
+});
