@@ -21,7 +21,7 @@ async function createEvent(api, token, suffix) {
   const response = await api.post(`${baseURL}/events`, {
     headers: { Authorization: `Bearer ${token}` },
     data: {
-      title: `Playwright API ${suffix}`,
+     title: `Playwright API ${suffix}`,
       description: 'Temporary event created by the Playwright API suite',
       category: 'Conference',
       venue: 'Automated Test Venue',
@@ -184,5 +184,6 @@ test('Book & Cancell', async ({ request: api }) => {
       await api.delete(`${baseURL}/bookings/${booking.id}`, { headers });
     }
     await api.delete(`${baseURL}/events/${event.id}`, { headers });
+    #push
   }
 });
